@@ -2,6 +2,7 @@ import "./App.css";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import BooksList from "./Books/BooksList";
+import Box from "./Box/Box";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
             myAnimal="dog"
           />
         </div>
+        <BooksList/>
       </main>
       <Footer year={2025}/>
     </>

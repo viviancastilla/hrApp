@@ -1,7 +1,6 @@
-import {useState} from 'react';
-import './App.css';
+import "./Box.css";
 
-function Box(){
+const Box =(props) => {
     return (
         <form>
             <div>
@@ -14,6 +13,6 @@ function Box(){
             </div>
         </form>
     );
-}
+};
 
 export default Box;

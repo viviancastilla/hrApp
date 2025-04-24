@@ -1,18 +1,23 @@
+import {createBrowserRouter, RouteProvider} from "react-router-dom";
 import "./App.css";
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import BooksList from "./Books/BooksList";
+import Root from "./pages/Root";
+import About from "./pages/About";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+  },
+  {
+    path: "/about",
+    element: <About/>
+  },
+]);
 
 const App = () => {
   return (
-    <>
-      <Header name="Vivian Castilla"/>
-      <main>
-        <BooksList/>
-      </main>
-      <Footer year={2025}/>
-    </>
+    <RouterProvider router={router} />
   );
-};
+}
 
-export default App
+export default App;

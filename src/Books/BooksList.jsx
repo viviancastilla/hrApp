@@ -12,17 +12,28 @@ const BookList = () => {
     const toggleStock = (id) => {
         const updatedArray = booksData.map((book) => 
             book.id === id? {...book, inStock: !book.inStock} : book)
-        console.log("stock button was clicked", id);
+        /*console.log("stock button was clicked", id);
         setBooksData(updatedArray);
-        console.log("stock button was clicked", id);
+        console.log("stock button was clicked", id);*/
     };
 
     const toggleFavorite = (id) => {
         setBooksData((prevState) => 
-        prevState)
+            prevState.map((book) =>
+                book.id === id ? { ...book, isFavorite: !book.isFavorite} : book
+            )
+        );
         console.log("favorite button was clicked", id);
     };
 
+    const handlePriceChange = (id) => {
+        setBooksData((prevState) =>
+            prevState.map(book)=>
+            book.id === id ? {...book, price: parseFloat(newprice(newPrice) } : book
+            )
+        }
+    )
+    }
     const searchHandle = (event) => {
         setSearchValue(event.target.value);
     };
@@ -49,6 +60,7 @@ const BookList = () => {
                 onEventhandler= {eventHandler(book.id)}
                 onToggleStock={()=> toggleStock(book.id)}
                 onToggleFavorite={()=> toggleFavorite(book.id)}
+                onPriceChange={() => togglePriceChange(book.id)}
                 />
             ))} 
             </div>

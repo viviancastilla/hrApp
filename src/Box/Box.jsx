@@ -1,17 +1,14 @@
 import "./Box.css";
 
-const Box =(props) => {
+const Box =({fullName, title, myAnimal, age, id}) => {
     return (
-        <form>
-            <div>
-                <input placeholder="Name"/>
-                <input placeholder="Title"/>
-                <input placeholder="Salary"/>
-                <input placerholder="Phone"/>
-                <input placeholder="Email"/>
-                <input placeholder="Animal"/>
+            <div className="box">
+                <p>{fullName}</p>
+                <p>{title}</p>
+                <p>{myAnimal}</p>
+                <p>{age}</p>
+                <p>ID: {id}</p>
             </div>
-        </form>
     );
 };
 

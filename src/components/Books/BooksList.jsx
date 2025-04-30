@@ -1,6 +1,8 @@
 import {useState} from "react";
 import {book} from "./booksData";
 import BookCard from "./BooksCard";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const BookList = () => {
     const [booksData, setBooksData] = useState(book);

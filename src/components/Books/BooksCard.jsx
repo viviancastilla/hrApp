@@ -2,19 +2,27 @@ import { useState } from "react";
 import "./Books.css";
 
 
-const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHandler, id, onToggleStock, onToggleFavorite, isEditing, newPrice, priceChange, ...rest}) =>{
+const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHandler, id, onToggleStock, onToggleFavorite, isEditing, onPriceChange, ...rest}) =>{
 
     const [isEditing, setIsEditing] = useState(false);
     const [newPrice, setNewPrice] = useState(price);
-    //console.log(rest);
+    /*console.log(rest);
     const eventHandler = () => {
         console.log("You clicked 'Add wishlist' button is clicked");
-    };
+    };*/
 
     const handleSaves = () => {
-        onPriceChange()
+        onPriceChange(id, newPrice);
         setIsEditing(!isEditing);
-    }
+    };
+
+    const handleCancel = () => {
+        setNewPrice(price);
+        setIsEditing(!isEditing);
+    };
+
+    const isSaveDisabled = 
+    newPrice === "" || parseFloat(newPrice) === parseFloat(price);
 
    /*const [isFavorite, setIsFavorite] = useState(false);
 
@@ -58,7 +66,11 @@ const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHan
             <button onClick={() => setIsEditing(!isEditing)}>{isEditing ? "Save" : "Edit"}</button>
 
             {isEditing ? (
+                <>
                 <button onCLick={handleSaves}>Save</button>
+                <button onClick={handleCancel}>Cancel</button>
+                </>
+                
             ) : (
                 <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
             )}

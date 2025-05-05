@@ -1,11 +1,10 @@
 import {useState} from "react";
-import {book} from "./booksData";
 import BookCard from "./BooksCard";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const BookList = () => {
-    const [booksData, setBooksData] = useState(book);
+const BookList = ({booksData, setBooksData}) => {
+    //const [booksData, setBooksData] = useState(book);
     const [searchValue, setSearchValue] = useState("");
 
     const eventHandler = (id) => {
@@ -13,60 +12,74 @@ const BookList = () => {
     };
     const toggleStock = (id) => {
         const updatedArray = booksData.map((book) => 
-            book.id === id? {...book, inStock: !book.inStock} : book)
+            book.id === id? {...book, inStock: !book.inStock} : book);
         /*console.log("stock button was clicked", id);
         setBooksData(updatedArray);
         console.log("stock button was clicked", id);*/
+        setBooksData(updatedArray);
     };
 
     const toggleFavorite = (id) => {
+        console.log("favorite button was clicked", id);
         setBooksData((prevState) => 
             prevState.map((book) =>
-                book.id === id ? { ...book, isFavorite: !book.isFavorite} : book
-            )
+                book.id === id ? { ...book, isFavorite: !book.isFavorite} : book)
         );
-        console.log("favorite button was clicked", id);
     };
 
-    const handlePriceChange = (id) => {
+    const handlePriceChange = (id, newPrice) => {
         setBooksData((prevState) =>
-            prevState.map(book)=>
-            book.id === id ? {...book, price: parseFloat(newprice(newPrice) } : book
+            prevState.map((book)=>
+            book.id === id ? {...book, price: parseFloat(newPrice) } : book
             )
-        }
-    )
-    }
+        );
+    };
+
     const searchHandle = (event) => {
         setSearchValue(event.target.value);
     };
 
+    const filteredBooks = booksData.filter((book) => {
+        const search = searchValue.toLowerCase();
+        return(
+            book.title.toLowerCase().includes(search) ||
+            book.author.toLowerCase().includes(search)
+        );
+    });
+
     return(
         <>
-        <h1>Books catalog</h1>
-        <label htmlFor="search">Search</label>
-        <input 
-            type="text" 
-            id="search" 
-            name="search" 
-            value={searchValue} 
-            onChange={searchHandle}
-        />
-
-        <p>You search word is: {searchValue}</p>
-
-        <div className="boxes">
-            {booksData.map((book) => (
-                <BookCard 
-                key={book.id} 
-                {...book} 
-                onEventhandler= {eventHandler(book.id)}
-                onToggleStock={()=> toggleStock(book.id)}
-                onToggleFavorite={()=> toggleFavorite(book.id)}
-                onPriceChange={() => togglePriceChange(book.id)}
+            <div className="books">
+                <h1>Books catalog</h1>
+                <label htmlFor="search">Search</label>
+                <input 
+                    type="text" 
+                    id="search" 
+                    name="search" 
+                    value={searchValue} 
+                    onChange={searchHandle}
                 />
-            ))} 
+
+                <p>You search word is: {searchValue}</p>
+
+                <div className="boxes">
+                {filteredBooks.length > 0 ? (
+                    filteredBooks.map((book) => (
+                        <BookCard
+                            key={book.id} 
+                            {...book} 
+                            onEventhandler= {eventHandler(book.id)}
+                            onToggleStock={toggleStock}
+                            onToggleFavorite={()=> toggleFavorite(book.id)}
+                            onPriceChange={() => handlePriceChange}
+                        />
+                    ))
+                ) : (
+                    <p>No matching bookd found. Try another search.</p>
+                )}
             </div>
-        </>
+        </div>
+    </>
     );
 };
 

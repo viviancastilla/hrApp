@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Books.css";
 
 
-const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHandler, id, onToggleStock, onToggleFavorite, isEditing, onPriceChange, ...rest}) =>{
+const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHandler, id, onToggleStock, onToggleFavorite, onPriceChange, ...rest}) =>{
 
     const [isEditing, setIsEditing] = useState(false);
     const [newPrice, setNewPrice] = useState(price);
@@ -62,20 +62,20 @@ const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHan
             </div>
             <div className="bookCard-footer">
             <button onClick={onEventHandler}>See more</button>
-            {!inStock && <button onClick={eventHandler}>Add to Wishlist</button>}
+            {!inStock && <button>Add to Wishlist</button>}
             <button onClick={() => setIsEditing(!isEditing)}>{isEditing ? "Save" : "Edit"}</button>
 
             {isEditing ? (
                 <>
-                <button onCLick={handleSaves}>Save</button>
+                <button onCLick={handleSaves} disabled={isSaveDisabled}>Save</button>
                 <button onClick={handleCancel}>Cancel</button>
                 </>
-                
             ) : (
                 <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
             )}
         </div>
     </div>
     );
+};
 
 export default BooksCard;

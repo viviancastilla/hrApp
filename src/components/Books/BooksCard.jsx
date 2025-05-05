@@ -2,7 +2,20 @@ import { useState } from "react";
 import "./Books.css";
 
 
-const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHandler, id, onToggleStock, onToggleFavorite, onPriceChange, ...rest}) =>{
+const BooksCard = ({
+    title,
+    author, 
+    price, 
+    genre, 
+    inStock, 
+    isFavorite, 
+    onEventHandler, 
+    id, 
+    onToggleStock, 
+    onToggleFavorite, 
+    onPriceChange, 
+    ...rest
+}) =>{
 
     const [isEditing, setIsEditing] = useState(false);
     const [newPrice, setNewPrice] = useState(price);
@@ -13,12 +26,12 @@ const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHan
 
     const handleSaves = () => {
         onPriceChange(id, newPrice);
-        setIsEditing(!isEditing);
+        setIsEditing(false);
     };
 
     const handleCancel = () => {
         setNewPrice(price);
-        setIsEditing(!isEditing);
+        setIsEditing(false);
     };
 
     const isSaveDisabled = 
@@ -47,19 +60,19 @@ const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHan
                 <p>{author}</p>
                 <p className="genre">{genre}</p>
             </div>
+
             <div className="bookCard-content">
                 {isEditing ? (
                     <input 
                         type="text" 
                         value={newPrice}
                         onChange={(e) => setNewPrice(e.target.value)}
-                        /> ): (
+                        /> 
+                    ): (
                         <p className="price">{price}€</p>
                     )}
             </div>
-            <div>
-            <p className="price">{price}€</p>
-            </div>
+
             <div className="bookCard-footer">
             <button onClick={onEventHandler}>See more</button>
             {!inStock && <button>Add to Wishlist</button>}
@@ -67,7 +80,7 @@ const BooksCard = ({title, author, price, genre, inStock, isFavorite, onEventHan
 
             {isEditing ? (
                 <>
-                <button onCLick={handleSaves} disabled={isSaveDisabled}>Save</button>
+                <button onClick={handleSaves} disabled={isSaveDisabled}>Save</button>
                 <button onClick={handleCancel}>Cancel</button>
                 </>
             ) : (

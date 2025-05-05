@@ -1,7 +1,7 @@
 import {useState} from "react";
 import BookCard from "./BooksCard";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 const BookList = ({booksData, setBooksData}) => {
     //const [booksData, setBooksData] = useState(book);
@@ -68,7 +68,7 @@ const BookList = ({booksData, setBooksData}) => {
                         <BookCard
                             key={book.id} 
                             {...book} 
-                            onEventhandler= {eventHandler(book.id)}
+                            onEventHandler={() => eventHandler(book.id)}
                             onToggleStock={toggleStock}
                             onToggleFavorite={()=> toggleFavorite(book.id)}
                             onPriceChange={() => handlePriceChange}

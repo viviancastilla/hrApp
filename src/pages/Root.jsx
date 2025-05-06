@@ -8,7 +8,7 @@ const Root = () => {
     <>
       <Header name="Vivian Castilla"/>
       <main>
-        <h1>I am a root component</h1>
+        <Outlet />
       </main>
       <Footer year={2025}/>
     </>
